@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+vector<vector<long long int>> printPascal(int m) 
+{
+  vector<vector<long long int>> ans;
+  vector<long long int> sol;
+  ans.push_back({1});
+  for(int i=1;i<m;i++)
+  {
+    int n=ans[i-1].size();
+    
+    for(int j=0;j<=i;j++)
+    {
+      long long int dia=0,same=0;
+      if((i-1)>=0&&(j-1)>=0)
+      dia=ans[i-1][j-1];
+      if((j<n&&(i-1)>=0))
+      same=ans[i-1][j];
+
+      sol.push_back(dia+same);
+    }
+    ans.push_back(sol);
+    sol.clear();
+  }
+  return ans;
+}
