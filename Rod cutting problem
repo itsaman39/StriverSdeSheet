@@ -1,0 +1,44 @@
+int solve(int ind,int len,vector<int> &price,vector<vector<int>> &dp)
+{
+	if(ind==0)
+	{
+		return len*price[0];
+	}
+	if(dp[ind][len]!=-1)
+	return dp[ind][len];
+	//take
+	int t=INT_MIN;
+	if(len>=(ind+1))
+	t=price[ind]+solve(ind,len-(ind+1),price,dp);
+	//nottake
+
+	int nt=0+ solve(ind-1,len,price,dp);
+
+	return dp[ind][len]=max(nt,t);
+}
+
+
+
+
+int cutRod(vector<int> &price, int n)
+{
+	vector<vector<int>> dp(price.size(),vector<int>(n+1,0));
+	for(int len=0;len<=n;len++)
+	dp[0][len]=len*price[0];
+
+	for(int ind=0;ind<price.size();ind++)
+	{
+		for(int len=0;len<=0;len++)
+		{
+		int t=INT_MIN;
+	    if(len>=(ind+1))
+	    t=price[ind]+dp[ind][len-(ind+1)];
+	    
+
+	    int nt=0+ dp[ind-1][len];
+
+	     dp[ind][len]=max(nt,t);	
+		}
+	}
+	return dp[n-1][0];
+}
