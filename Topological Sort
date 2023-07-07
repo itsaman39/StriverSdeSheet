@@ -1,0 +1,49 @@
+#include <bits/stdc++.h> 
+
+
+void makeEdge(int u,int v,vector<int> adj[])
+{
+    adj[u].push_back(v);
+}
+
+
+void dfs(int src,vector<int> adj[],int visited[],stack<int> &st)
+{
+    visited[src]=1;
+
+    for(auto it:adj[src])
+    {
+        if(visited[it]==0)
+        dfs(it,adj,visited,st);
+    }
+    st.push(src);
+}
+
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+   int visited[v]={0};
+   stack<int> st;
+   vector<int> adj[v];
+   for(int i=0;i<e;i++)
+   {
+       int u=edges[i][0];
+       int v=edges[i][1];
+       makeEdge(u,v,adj);
+   }
+    vector<int> ans;
+   for(int i=0;i<v;i++)
+   {
+       if(visited[i]==0)
+       {
+           dfs(i,adj,visited,st);
+       }
+   }
+   while(!st.empty())
+           {
+               ans.push_back(st.top());
+               st.pop();
+           }
+   return ans;
+  
+
+
+}
