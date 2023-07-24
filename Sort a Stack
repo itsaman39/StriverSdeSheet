@@ -1,0 +1,27 @@
+include <bits/stdc++.h> 
+
+void fun(stack<int> &stack,vector<int> &ans)
+{
+	if(stack.empty())
+	return ;
+
+	ans.push_back(stack.top());
+	stack.pop();
+	fun(stack,ans);
+}
+void fun1(int ind,stack<int> &stack,vector<int> &ans)
+{
+	if(ind==ans.size())
+	return ;
+
+	stack.push(ans[ind]);
+	fun1(ind+1,stack,ans);
+}
+
+void sortStack(stack<int> &stack)
+{
+	vector<int> ans;
+	fun(stack,ans);
+	sort(ans.begin(),ans.end());
+	fun1(0,stack,ans);
+}
