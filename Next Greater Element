@@ -1,0 +1,26 @@
+#include <bits/stdc++.h> 
+
+vector<int> nextGreater(vector<int> &arr, int n) {
+    
+    vector<int> res;
+    // res.push_back(-1);
+    stack<int> st;
+    for(int i=n-1;i>=0;i--)
+    {
+        while(!st.empty()&&arr[i]>=arr[st.top()])
+        st.pop();
+        
+
+        st.empty()==true?res.push_back(-1):res.push_back(arr[st.top()]);
+        // if(st.empty())
+        // res.push_back(-1);
+        // else
+        // res.push_back(arr[st.top()]);
+
+        st.push(i);
+    }
+    reverse(res.begin(),res.end());
+    return res;
+
+
+}
